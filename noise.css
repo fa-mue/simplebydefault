@@ -462,7 +462,9 @@ html[data-state="sharp"] .noise-clutter {
 
 .hero-sharp h1 {
   margin-top: 1.5rem;
-  max-width: 15ch;
+  /* The break between the two sentences sits in the markup, so the box only
+     has to be wide enough for the longer of them. */
+  max-width: 17ch;
   font-size: clamp(2.6rem, 7.5vw, 5rem);
   font-weight: 700;
   letter-spacing: -0.035em;
