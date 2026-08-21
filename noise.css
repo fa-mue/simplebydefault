@@ -394,23 +394,9 @@ html[data-state="sharp"] .noise-clutter {
   color: var(--ink);
 }
 
-.brand .reticle {
-  position: relative;
-  width: 0.7rem;
-  height: 0.7rem;
-  border: 1.5px solid var(--accent);
-  border-radius: 50%;
-}
-
-.brand .reticle::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 0.2rem;
-  height: 0.2rem;
-  border-radius: 50%;
-  background: var(--accent);
+.brand .mark {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .ghost-btn {

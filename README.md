@@ -12,6 +12,7 @@ impressum.html     Rechtliches, aktuell Platzhalter
 datenschutz.html   Rechtliches, aktuell Platzhalter
 noise.css          Alle Stile
 noise.js           Rauschen, Popups, Scharfstellung, Kontakt-Widget
+logo.svg           Bildmarke, dient zugleich als Favicon
 CNAME              Custom Domain für GitHub Pages
 ```
 
