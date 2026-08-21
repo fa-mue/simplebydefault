@@ -185,9 +185,15 @@ html[data-state="sharp"] .backdrop-grain {
 }
 
 .hero-noise h1 {
-  max-width: 20ch;
+  /* Etwas weiter als die längste Zeile: die Box schrumpft ohnehin auf den
+     Inhalt, die Reserve fängt nur breiter bauende System-Schriften ab. */
+  max-width: 22ch;
   margin-inline: auto;
-  font-size: clamp(2.4rem, 7vw, 5rem);
+  /* Der Umbruch zwischen den beiden Sätzen steht im Markup. Damit die
+     längere zweite Zeile auch auf schmalen Geräten am Stück bleibt, darf
+     der clamp-Boden nicht zu früh greifen: ab 548px aufwärts ändert sich
+     nichts, darunter skaliert die Headline weiter mit. */
+  font-size: clamp(1.45rem, 7vw, 5rem);
   font-weight: 680;
   letter-spacing: -0.035em;
   line-height: 1.02;
