@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="de" data-state="noise">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Simple by Default — Noise vs. Focus</title>
+<meta name="description" content="Komplexität vernichten, Ergebnisse scharfstellen. Radikal schlanke B2B-Systeme für Video-Pipelines, KI-Lösungen und operative Prozesse.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simple by Default — Make It Sharp">
+<meta property="og:description" content="Zu viele Tools. Zu viel Komplexität. Zu viel Noise. Wir machen es scharf.">
+<meta property="og:url" content="https://simplebydefault.com/">
+<link rel="canonical" href="https://simplebydefault.com/">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%23FCFCFA'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='9'%20fill='none'%20stroke='%231C5A3C'%20stroke-width='2'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='2.5'%20fill='%231C5A3C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="noise.css">
+<script src="noise.js" defer></script>
+</head>
+
+<body>
+<a class="skip-link" href="#focus">Zum Inhalt springen</a>
+
+<canvas id="grain" class="backdrop-grain" aria-hidden="true"></canvas>
+
+<!-- Background clutter: every notification that fills the brain. JS pops
+     them in one after another, so the screen visibly fills up. Purely
+     decorative, cleared the instant the page is sharpened. -->
+<div class="noise-clutter" aria-hidden="true">
+  <div class="pop" style="--x:4%;--y:9%;--w:12.5rem;--r:-4deg;--o:.55;--d:7s">
+    <span class="pop-dot filled"></span>
+    <div><b>Slack</b><span>12 neue Nachrichten</span></div>
+    <span class="badge">12</span>
+  </div>
+  <div class="pop" style="--x:69%;--y:7%;--w:12.5rem;--r:3deg;--o:.5;--d:8.5s">
+    <span class="pop-dot"></span>
+    <div><b>KI-Assistent</b><span>3 neue Vorschläge bereit</span></div>
+    <span class="badge">KI</span>
+  </div>
+  <div class="pop" style="--x:59%;--y:19%;--w:13rem;--r:-3deg;--o:.5;--d:6.5s">
+    <span class="pop-dot filled"></span>
+    <div><b>Newsletter</b><span>Jetzt abonnieren, nichts verpassen!</span></div>
+  </div>
+  <div class="pop" style="--x:7%;--y:25%;--w:12rem;--r:2deg;--o:.48;--d:9s">
+    <span class="pop-dot"></span>
+    <div><b>Kalender</b><span>Meeting in 5 Minuten</span></div>
+  </div>
+  <div class="pop" style="--x:73%;--y:33%;--w:11.5rem;--r:-2deg;--o:.52;--d:7.5s">
+    <span class="pop-dot filled"></span>
+    <div><b>Posteingang</b><span>47 ungelesen</span></div>
+    <span class="badge">47</span>
+  </div>
+  <div class="pop" style="--x:3%;--y:43%;--w:12.5rem;--r:3deg;--o:.45;--d:8s">
+    <span class="pop-dot"></span>
+    <div><b>Cookie-Einwilligung</b><span>Bitte 312 Anbieter bestätigen</span></div>
+  </div>
+  <div class="pop" style="--x:66%;--y:49%;--w:12rem;--r:-4deg;--o:.5;--d:6.8s">
+    <span class="pop-dot filled"></span>
+    <div><b>System-Update</b><span>Neustart erforderlich</span></div>
+    <span class="badge">NEU</span>
+  </div>
+  <div class="pop" style="--x:11%;--y:59%;--w:12.5rem;--r:2deg;--o:.5;--d:9.5s">
+    <span class="pop-dot"></span>
+    <div><b>LinkedIn</b><span>8 neue Benachrichtigungen</span></div>
+    <span class="badge">8</span>
+  </div>
+  <div class="pop" style="--x:71%;--y:65%;--w:12rem;--r:4deg;--o:.46;--d:7.2s">
+    <span class="pop-dot filled"></span>
+    <div><b>Testphase</b><span>Endet heute. Jetzt upgraden!</span></div>
+  </div>
+  <div class="pop" style="--x:5%;--y:73%;--w:13rem;--r:-3deg;--o:.48;--d:8.2s">
+    <span class="pop-dot"></span>
+    <div><b>KI</b><span>Fasse deinen Posteingang zusammen…</span></div>
+  </div>
+  <div class="pop" style="--x:59%;--y:79%;--w:12.5rem;--r:2deg;--o:.45;--d:7s">
+    <span class="pop-dot filled"></span>
+    <div><b>Erinnerung</b><span>6 Leads nachfassen</span></div>
+    <span class="badge">6</span>
+  </div>
+  <div class="pop" style="--x:31%;--y:5%;--w:12.5rem;--r:-2deg;--o:.4;--d:9s">
+    <span class="pop-dot"></span>
+    <div><b>Neuer Kommentar</b><span>in „Q3-Strategie.doc"</span></div>
+  </div>
+  <div class="pop" style="--x:40%;--y:85%;--w:12rem;--r:3deg;--o:.42;--d:8s">
+    <span class="pop-dot filled"></span>
+    <div><b>Speicher fast voll</b><span>98% belegt</span></div>
+  </div>
+</div>
+
+<!-- ===================== STATE A · NOISE ===================== -->
+
+<section class="hero-noise only-noise">
+  <div>
+    <p class="eyebrow mono">System Status: <span class="live">Noise</span></p>
+    <h1 class="haze">Zu viele Tools. Zu viel Komplexität. Zu viel Noise.</h1>
+    <p class="sub haze">Die meisten B2B-Systeme scheitern an Over-Engineering. Wir machen es scharf.</p>
+
+    <div class="sharpen-wrap">
+      <button type="button" class="sharpen" data-sharpen>
+        <span class="dot" aria-hidden="true"></span>
+        Make It Sharp
+      </button>
+      <p class="hint">Klicken zum Scharfstellen</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATE B · SHARP ===================== -->
+
+<header class="topbar only-sharp">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="reticle" aria-hidden="true"></span>
+      Simple by Default
+    </a>
+    <button type="button" class="ghost-btn" data-noise>
+      <span class="swatch" aria-hidden="true"></span>
+      Re-add noise
+    </button>
+  </div>
+</header>
+
+<main id="focus" class="only-sharp">
+
+  <section class="hero-sharp">
+    <div class="wrap">
+      <p class="eyebrow-line">Focused · B2B Systems</p>
+      <h1>Keep It Simple. Make It Work.</h1>
+      <p class="sub">Radikal schlanke Systeme für Video-Pipelines, KI-Lösungen und operative Prozesse.</p>
+    </div>
+  </section>
+
+  <section class="section services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow-line">Leistungen</p>
+      </div>
+
+      <ul class="rows">
+        <li class="row">
+          <span class="idx">01</span>
+          <h3>Automated Workflows &amp; AI Services</h3>
+          <p>Prozesse ohne Reibung. KI dort, wo sie trägt, nicht als Buzzword.</p>
+        </li>
+        <li class="row">
+          <span class="idx">02</span>
+          <h3>Editing &amp; Video Pipelines</h3>
+          <p>Scharfer Schnitt, schnelle Auslieferung. Als System gebaut, nicht als Einzelfall.</p>
+        </li>
+        <li class="row">
+          <span class="idx">03</span>
+          <h3>System Architecture &amp; Operations</h3>
+          <p>Schlanke Verwaltung, zero Overhead. Wenige bewegliche Teile, stabiler Betrieb.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section philosophy">
+    <div class="wrap">
+      <p class="eyebrow-line">Haltung</p>
+      <p class="line">Simple by Default.</p>
+      <p class="foot">Je weniger bewegliche Teile, desto weniger kann kaputtgehen. Wir bauen Systeme, die im Alltag bestehen, statt Feature-Listen, die niemand nutzt.</p>
+    </div>
+  </section>
+
+  <section class="section section-contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow-line">Kontakt</p>
+      <p class="contact-line">Sagen Sie uns, was scharf werden soll.</p>
+
+      <form class="widget" data-contact novalidate>
+        <div class="field-row">
+          <label class="visually-hidden" for="email">E-Mail-Adresse</label>
+          <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email">
+          <button type="submit" class="submit">
+            Request access <span aria-hidden="true">→</span>
+          </button>
+        </div>
+        <p class="widget-note">Kein Funnel, keine Demo-Pipeline. Direkt an <a href="mailto:hello@simplebydefault.com">hello@simplebydefault.com</a>.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 Simple by Default</span>
+      <nav class="footer-links" aria-label="Rechtliches">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="mailto:hello@simplebydefault.com">hello@simplebydefault.com</a>
+      </nav>
+    </div>
+  </footer>
+
+</main>
+
+</body>
+</html>
