@@ -12,8 +12,10 @@
   --muted: #6E6E68;
   --line: #E5E5E0;
   --line-soft: #EFEFEA;
-  --accent: #1C5A3C;
-  --accent-dark: #133F2A;
+  /* Der Akzent ist der Ton der Bildmarke. Wird er geändert, muss der
+     fill-Wert in logo.svg mitgezogen werden, dort steht er fest. */
+  --accent: #0F7D7B;
+  --accent-dark: #0A5A58;
 
   /* Noise world: black and grey. */
   --dark-bg: #000000;
